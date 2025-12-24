@@ -4,7 +4,6 @@ const Quote = () => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
-        email: '',
         serviceType: '',
         pickupLocation: '',
         destination: '',
@@ -61,7 +60,6 @@ const Quote = () => {
         const message = `Quote Request:
 Name: ${formData.name}
 Phone: ${formData.phone}
-Email: ${formData.email}
 Service: ${formData.serviceType}
 Pickup: ${formData.pickupLocation}
 Destination: ${formData.destination}
@@ -151,22 +149,6 @@ Message: ${formData.message}`;
                                 </div>
                             </div>
 
-                            {/* Email */}
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-semibold text-navy-800 mb-2">
-                                    Email Address
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="form-input"
-                                    placeholder="your@email.com"
-                                />
-                            </div>
-
                             {/* Service Type */}
                             <div>
                                 <label htmlFor="serviceType" className="block text-sm font-semibold text-navy-800 mb-2">
@@ -185,6 +167,8 @@ Message: ${formData.message}`;
                                     <option value="icu">ICU Ambulance</option>
                                     <option value="bls">BLS Ambulance</option>
                                     <option value="neonatal">Neonatal Ambulance</option>
+                                    <option value="freezer">Freezer Van</option>
+                                    <option value="mortuary">Mortuary Van</option>
                                     <option value="patient-transfer">Patient Transfer</option>
                                     <option value="event-standby">Event Medical Standby</option>
                                 </select>

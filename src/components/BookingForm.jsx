@@ -388,6 +388,8 @@ Please confirm my booking.`;
                 { value: 'basic', label: 'BLS Ambulance', desc: 'Basic Life Support' },
                 { value: 'icu', label: 'ICU Ambulance', desc: 'Intensive Care Unit' },
                 { value: 'neonatal', label: 'Neonatal Ambulance', desc: 'Specialized for infants' },
+                { value: 'freezer', label: 'Freezer Van', desc: 'Temperature controlled transport' },
+                { value: 'mortuary', label: 'Mortuary Van', desc: 'Deceased transport' },
               ].map((type) => (
                 <label key={type.value} className="flex items-center cursor-pointer group p-3 rounded-xl hover:bg-primary-50 transition-colors duration-200 border-2 border-transparent hover:border-primary-200">
                   <input
