@@ -27,7 +27,7 @@ const IconSVG = ({ type }) => {
   };
 
   return (
-    <svg className="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+    <svg className="w-8 h-8 text-primary-600 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
       {icons[type] || icons.hospital}
     </svg>
   );
@@ -39,10 +39,10 @@ IconSVG.propTypes = {
 
 const ServiceCard = ({ title, description, iconType, features }) => {
   return (
-    <div className="card p-8 h-full group">
+    <div className="card p-8 h-full group hover:shadow-xl transition-all duration-300">
       <div className="text-center">
         {/* Icon Box */}
-        <div className="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">
+        <div className="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary-600 transition-all duration-300 group-hover:scale-110">
           <IconSVG type={iconType} />
         </div>
 

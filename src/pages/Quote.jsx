@@ -19,22 +19,37 @@ const Quote = () => {
     };
 
     // Open Google Maps with current location
-    const openGoogleMaps = () => {
+    const openGoogleMaps = (field) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    // Open Google Maps centered at current location
-                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-                    window.open(mapsUrl, '_blank');
+
+                    // Try to detect if mobile and open native maps app
+                    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+                    if (isMobile) {
+                        // Opens native Google Maps app with marker at current location
+                        const mapsUrl = `geo:${latitude},${longitude}?q=${latitude},${longitude}`;
+                        window.location.href = mapsUrl;
+
+                        // Fallback for iOS
+                        setTimeout(() => {
+                            window.open(`https://maps.apple.com/?ll=${latitude},${longitude}&q=Current+Location`, '_blank');
+                        }, 500);
+                    } else {
+                        // Desktop - open in new tab with marker
+                        window.open(`https://www.google.com/maps?q=${latitude},${longitude}&z=17`, '_blank');
+                    }
                 },
-                () => {
-                    // Fallback - open maps without location
-                    window.open('https://www.google.com/maps', '_blank');
+                (error) => {
+                    alert('Could not get your location. Please allow location access and try again.');
+                    console.error('Geolocation error:', error);
                 },
-                { enableHighAccuracy: true, timeout: 10000 }
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
             );
         } else {
+            alert('Geolocation is not supported by your browser');
             window.open('https://www.google.com/maps', '_blank');
         }
     };

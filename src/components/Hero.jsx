@@ -84,27 +84,31 @@ const Hero = () => {
               </span>
             </div>
 
-            {/* Title with Animation */}
+            {/* Title with Animation - Premium Style */}
             <div className="overflow-hidden">
               <h1
                 key={`title-${currentSlide}`}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+                className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight"
                 style={{
-                  animation: 'slideUp 0.8s ease-out forwards'
+                  animation: 'slideUp 0.8s ease-out forwards',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.6)',
+                  fontFamily: "'Poppins', sans-serif"
                 }}
               >
-                {slides[currentSlide].title}
+                <span className="text-primary-500 drop-shadow-lg">24/7</span>
+                <span className="text-white drop-shadow-lg"> {slides[currentSlide].title.replace('24/7 ', '').replace('24/7', '')}</span>
               </h1>
             </div>
 
-            {/* Subtitle with Animation */}
+            {/* Subtitle with Animation - Premium Style */}
             <div className="overflow-hidden">
               <p
                 key={`subtitle-${currentSlide}`}
-                className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-xl"
+                className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-xl font-medium"
                 style={{
                   animation: 'slideUp 0.8s ease-out 0.2s forwards',
-                  opacity: 0
+                  opacity: 0,
+                  textShadow: '1px 1px 3px rgba(0,0,0,0.5)'
                 }}
               >
                 {slides[currentSlide].subtitle}
