@@ -132,8 +132,8 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom Gradient - Black blur */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-navy-900/80 via-navy-900/40 to-transparent z-10 backdrop-blur-sm" />
+      {/* Bottom Gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-50 to-transparent z-10" />
 
       {/* Slide Up Animation */}
       <style>{`
