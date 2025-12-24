@@ -64,8 +64,8 @@ const Navbar = () => {
                   key={link.to}
                   to={link.to}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${isActive(link.to)
-                      ? 'text-primary-600 bg-primary-50'
-                      : 'text-navy-700 hover:text-primary-600 hover:bg-primary-50'
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'text-navy-700 hover:text-primary-600 hover:bg-primary-50'
                     }`}
                 >
                   {link.label}
@@ -73,10 +73,22 @@ const Navbar = () => {
               ))}
               <a
                 href="tel:+919942000266"
-                className="btn-primary ml-4 !py-3 !px-6"
+                className="relative ml-4 group overflow-hidden"
               >
-                <span>📞</span>
-                <span>Call Now</span>
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-600 via-red-500 to-primary-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+
+                {/* Button */}
+                <div className="relative flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-red-600 text-white font-semibold rounded-full shadow-lg shadow-primary-600/40 group-hover:shadow-xl group-hover:shadow-primary-600/50 transition-all duration-300 group-hover:scale-105">
+                  {/* Animated phone icon */}
+                  <span className="text-lg animate-bounce">📞</span>
+                  <span>Call Now</span>
+
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 rounded-full overflow-hidden">
+                    <div className="absolute -top-1 -left-1 w-6 h-full bg-white/30 rotate-12 transform -translate-x-full group-hover:translate-x-[400%] transition-transform duration-700"></div>
+                  </div>
+                </div>
               </a>
             </div>
 
@@ -106,8 +118,8 @@ const Navbar = () => {
                   to={link.to}
                   onClick={() => setIsOpen(false)}
                   className={`block px-4 py-3 rounded-xl font-medium transition-all duration-300 ${isActive(link.to)
-                      ? 'text-primary-600 bg-primary-50'
-                      : 'text-navy-700 hover:text-primary-600 hover:bg-primary-50'
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'text-navy-700 hover:text-primary-600 hover:bg-primary-50'
                     }`}
                 >
                   {link.label}
