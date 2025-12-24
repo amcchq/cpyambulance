@@ -209,7 +209,7 @@ Message: ${formData.message}`;
                                                                 { value: 'icu', label: 'ICU Ambulance' },
                                                                 { value: 'bls', label: 'BLS Ambulance' },
                                                                 { value: 'neonatal', label: 'Neonatal Ambulance' },
-                                                                { value: 'patient-transfer', label: 'Patient Transfer' },
+                                                                { value: 'patient-transfer', label: 'Bed to Bed Patient Transfer' },
                                                                 { value: 'event-standby', label: 'Event Medical Standby' },
                                                             ].map((type) => (
                                                                 <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
@@ -260,7 +260,7 @@ Message: ${formData.message}`;
                                                     <div className="px-3 pb-3" onClick={(e) => e.stopPropagation()}>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-blue-200">
                                                             {[
-                                                                { value: 'freezer', label: 'Freezer Van' },
+                                                                { value: 'freezer', label: 'Home Freezer Box' },
                                                                 { value: 'mortuary', label: 'Mortuary Van' },
                                                             ].map((type) => (
                                                                 <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">

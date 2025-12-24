@@ -395,7 +395,7 @@ Please confirm my booking.`;
                   { value: 'basic', label: 'BLS Ambulance', desc: 'Basic Life Support' },
                   { value: 'icu', label: 'ICU Ambulance', desc: 'Intensive Care Unit' },
                   { value: 'neonatal', label: 'Neonatal Ambulance', desc: 'Specialized for infants' },
-                  { value: 'patient-transfer', label: 'Patient Transfer', desc: 'Hospital to hospital' },
+                  { value: 'patient-transfer', label: 'Bed to Bed Patient Transfer', desc: 'Hospital to hospital' },
                 ].map((type) => (
                   <label key={type.value} className="flex items-center cursor-pointer group p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
                     <input
@@ -423,7 +423,7 @@ Please confirm my booking.`;
               </p>
               <div className="space-y-2">
                 {[
-                  { value: 'freezer', label: 'Freezer Van', desc: 'Temperature controlled transport' },
+                  { value: 'freezer', label: 'Home Freezer Box', desc: 'Temperature controlled at home' },
                   { value: 'mortuary', label: 'Mortuary Van', desc: 'Deceased transport' },
                 ].map((type) => (
                   <label key={type.value} className="flex items-center cursor-pointer group p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">
