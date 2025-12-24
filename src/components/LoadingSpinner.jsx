@@ -1,54 +1,46 @@
+import { useState, useEffect } from 'react';
+
 const LoadingSpinner = () => {
+    const [showText, setShowText] = useState(false);
+    const [showTagline, setShowTagline] = useState(false);
+
+    useEffect(() => {
+        // Stagger the text appearance
+        const timer1 = setTimeout(() => setShowText(true), 200);
+        const timer2 = setTimeout(() => setShowTagline(true), 500);
+
+        return () => {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        };
+    }, []);
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
-            {/* ECG Heartbeat Loader */}
-            <div className="loading mb-8">
-                <svg width="64px" height="48px">
-                    <polyline
-                        points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"
-                        id="back"
-                        style={{
-                            fill: 'none',
-                            stroke: '#ff4d5033',
-                            strokeWidth: 3,
-                            strokeLinecap: 'round',
-                            strokeLinejoin: 'round'
-                        }}
-                    />
-                    <polyline
-                        points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"
-                        id="front"
-                        style={{
-                            fill: 'none',
-                            stroke: '#ef4444',
-                            strokeWidth: 3,
-                            strokeLinecap: 'round',
-                            strokeLinejoin: 'round',
-                            strokeDasharray: '48, 144',
-                            strokeDashoffset: 192,
-                            animation: 'dash 1.4s linear infinite'
-                        }}
-                    />
-                </svg>
+            {/* Bouncing Dots Loader */}
+            <div className="flex flex-row gap-2 mb-8">
+                <div className="w-4 h-4 rounded-full bg-red-500 animate-bounce"></div>
+                <div className="w-4 h-4 rounded-full bg-red-500 animate-bounce [animation-delay:-.3s]"></div>
+                <div className="w-4 h-4 rounded-full bg-red-500 animate-bounce [animation-delay:-.5s]"></div>
             </div>
 
-            {/* Welcome Text */}
-            <h2 className="text-2xl font-bold text-navy-900 mb-2">
-                Welcome to <span className="text-primary-600">CPY Ambulance</span>
-            </h2>
-            <p className="text-navy-500">Loading emergency services...</p>
+            {/* CPY Ambulance Branding */}
+            <div className="text-center">
+                <h2
+                    className={`text-3xl md:text-4xl font-bold mb-3 transition-all duration-500 ease-out ${showText ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                        }`}
+                >
+                    <span className="text-navy-900">CPY</span> <span className="text-primary-600">Ambulance</span>
+                </h2>
 
-            {/* Animation Keyframes */}
-            <style>{`
-        @keyframes dash {
-          72.5% {
-            opacity: 0;
-          }
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-      `}</style>
+                {/* Premium Tagline */}
+                <p
+                    className={`text-navy-500 text-sm md:text-base font-medium tracking-wide transition-all duration-500 ease-out ${showTagline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                        }`}
+                >
+                    Your Emergency. Our Priority.
+                </p>
+            </div>
         </div>
     );
 };

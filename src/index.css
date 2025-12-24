@@ -179,3 +179,72 @@
   background: rgba(220, 38, 38, 0.15);
   color: #991b1b;
 }
+
+/* ECG Heartbeat Loader */
+.ecg-loader polyline {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ecg-back {
+  stroke: rgba(239, 68, 68, 0.2);
+}
+
+.ecg-front {
+  stroke: #ef4444;
+  stroke-dasharray: 60, 180;
+  stroke-dashoffset: 240;
+  animation: ecg-dash 1.4s linear infinite;
+}
+
+@keyframes ecg-dash {
+  72.5% {
+    opacity: 0;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Loading Screen Text Animations */
+.animate-fade-slide-up {
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease-out forwards;
+}
+
+.animate-fade-slide-up-delay {
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease-out 0.15s forwards;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle bounce for Call Now button */
+.animate-subtle-bounce {
+  animation: subtleBounce 2s ease-in-out infinite;
+}
+
+@keyframes subtleBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}

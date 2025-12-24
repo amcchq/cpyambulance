@@ -40,20 +40,21 @@ const Navbar = () => {
       <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-glass' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
+            {/* Logo - NOW VISIBLE ON MOBILE */}
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 sm:gap-3 group"
             >
               <img
                 src="/favicon.svg"
                 alt="CPY Ambulance"
-                className="w-12 h-12 transition-transform duration-300 group-hover:scale-110"
+                className="w-10 h-10 sm:w-12 sm:h-12 transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="hidden sm:block">
-                <span className="text-xl font-bold text-navy-900">CPY</span>
-                <span className="text-xl font-bold text-primary-600"> Ambulance</span>
+              {/* Text visible on ALL screen sizes */}
+              <div>
+                <span className="text-lg sm:text-xl font-bold text-navy-900">CPY</span>
+                <span className="text-lg sm:text-xl font-bold text-primary-600"> Ambulance</span>
               </div>
             </Link>
 
@@ -71,24 +72,16 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Premium Call Now Button */}
               <a
                 href="tel:+919942000266"
-                className="relative ml-4 group overflow-hidden"
+                className="ml-4 flex items-center gap-2 px-6 py-3 bg-white text-primary-600 font-bold rounded-full border-2 border-primary-600 hover:bg-primary-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 animate-subtle-bounce"
               >
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-600 via-red-500 to-primary-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-
-                {/* Button */}
-                <div className="relative flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-red-600 text-white font-semibold rounded-full shadow-lg shadow-primary-600/40 group-hover:shadow-xl group-hover:shadow-primary-600/50 transition-all duration-300 group-hover:scale-105">
-                  {/* Animated phone icon */}
-                  <span className="text-lg animate-bounce">📞</span>
-                  <span>Call Now</span>
-
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 rounded-full overflow-hidden">
-                    <div className="absolute -top-1 -left-1 w-6 h-full bg-white/30 rotate-12 transform -translate-x-full group-hover:translate-x-[400%] transition-transform duration-700"></div>
-                  </div>
-                </div>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                </svg>
+                Call Now
               </a>
             </div>
 
@@ -125,12 +118,13 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Mobile Call Now Button - Premium */}
               <a
                 href="tel:+919942000266"
-                className="btn-primary w-full mt-4"
+                className="block mt-4 text-center py-4 bg-gradient-to-r from-primary-600 via-red-500 to-primary-600 bg-[length:200%_100%] text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:bg-right transition-all duration-500"
               >
-                <span>📞</span>
-                <span>Call Now: +91-9942000266</span>
+                📞 Call Now: +91-9942000266
               </a>
             </div>
           </div>
