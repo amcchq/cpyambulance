@@ -151,27 +151,65 @@ Message: ${formData.message}`;
 
                             {/* Service Type */}
                             <div>
-                                <label htmlFor="serviceType" className="block text-sm font-semibold text-navy-800 mb-2">
+                                <label className="block text-sm font-semibold text-navy-800 mb-3">
                                     Service Type *
                                 </label>
-                                <select
-                                    id="serviceType"
-                                    name="serviceType"
-                                    value={formData.serviceType}
-                                    onChange={handleChange}
-                                    required
-                                    className="form-input"
-                                >
-                                    <option value="">Select a service</option>
-                                    <option value="emergency">Emergency Ambulance</option>
-                                    <option value="icu">ICU Ambulance</option>
-                                    <option value="bls">BLS Ambulance</option>
-                                    <option value="neonatal">Neonatal Ambulance</option>
-                                    <option value="freezer">Freezer Van</option>
-                                    <option value="mortuary">Mortuary Van</option>
-                                    <option value="patient-transfer">Patient Transfer</option>
-                                    <option value="event-standby">Event Medical Standby</option>
-                                </select>
+
+                                {/* Emergency Ambulance - Red Box */}
+                                <div className="border-2 border-red-300 rounded-xl p-4 mb-4 bg-red-50">
+                                    <p className="text-sm font-bold text-red-700 mb-3 flex items-center gap-2">
+                                        <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                                        🚨 Emergency Ambulance
+                                    </p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        {[
+                                            { value: 'emergency', label: 'Emergency Ambulance' },
+                                            { value: 'icu', label: 'ICU Ambulance' },
+                                            { value: 'bls', label: 'BLS Ambulance' },
+                                            { value: 'neonatal', label: 'Neonatal Ambulance' },
+                                            { value: 'patient-transfer', label: 'Patient Transfer' },
+                                            { value: 'event-standby', label: 'Event Medical Standby' },
+                                        ].map((type) => (
+                                            <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
+                                                <input
+                                                    type="radio"
+                                                    name="serviceType"
+                                                    value={type.value}
+                                                    checked={formData.serviceType === type.value}
+                                                    onChange={handleChange}
+                                                    className="w-4 h-4 text-red-600 border-red-300 focus:ring-red-500"
+                                                />
+                                                <span className="ml-2 text-sm text-navy-800">{type.label}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Non-Emergency Transport - Blue Box */}
+                                <div className="border-2 border-blue-300 rounded-xl p-4 bg-blue-50">
+                                    <p className="text-sm font-bold text-blue-700 mb-3 flex items-center gap-2">
+                                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                                        🚐 Non-Emergency Transport
+                                    </p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        {[
+                                            { value: 'freezer', label: 'Freezer Van' },
+                                            { value: 'mortuary', label: 'Mortuary Van' },
+                                        ].map((type) => (
+                                            <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">
+                                                <input
+                                                    type="radio"
+                                                    name="serviceType"
+                                                    value={type.value}
+                                                    checked={formData.serviceType === type.value}
+                                                    onChange={handleChange}
+                                                    className="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500"
+                                                />
+                                                <span className="ml-2 text-sm text-navy-800">{type.label}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Pickup Location */}
