@@ -18,11 +18,25 @@ const Quote = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    // Open Google Maps for location selection
+    // Open Google Maps with current location
     const openGoogleMaps = () => {
-        // Opens Google Maps with search - user can pick location
-        const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=';
-        window.open(mapsUrl, '_blank');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    // Open Google Maps centered at current location
+                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+                    window.open(mapsUrl, '_blank');
+                },
+                () => {
+                    // Fallback - open maps without location
+                    window.open('https://www.google.com/maps', '_blank');
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        } else {
+            window.open('https://www.google.com/maps', '_blank');
+        }
     };
 
     const handleSubmit = (e) => {
