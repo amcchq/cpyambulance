@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Ambulance Red Theme (Amcare-inspired)
+        
         primary: {
           50: '#fef2f2',
           100: '#fee2e2',

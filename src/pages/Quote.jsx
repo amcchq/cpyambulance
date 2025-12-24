@@ -5,53 +5,89 @@ const Quote = () => {
         name: '',
         phone: '',
         serviceType: '',
-        pickupLocation: '',
-        destination: '',
+        pickupAddress: '',
         message: ''
     });
 
     const [submitted, setSubmitted] = useState(false);
-    const [expandedCategory, setExpandedCategory] = useState(null);
+    const [location, setLocation] = useState(null);
+    const [locationLoading, setLocationLoading] = useState(false);
+    const [locationError, setLocationError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    // Open Google Maps with current location
-    const openGoogleMaps = (field) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-
-                    // Try to detect if mobile and open native maps app
-                    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-                    if (isMobile) {
-                        // Opens native Google Maps app with marker at current location
-                        const mapsUrl = `geo:${latitude},${longitude}?q=${latitude},${longitude}`;
-                        window.location.href = mapsUrl;
-
-                        // Fallback for iOS
-                        setTimeout(() => {
-                            window.open(`https://maps.apple.com/?ll=${latitude},${longitude}&q=Current+Location`, '_blank');
-                        }, 500);
-                    } else {
-                        // Desktop - open in new tab with marker
-                        window.open(`https://www.google.com/maps?q=${latitude},${longitude}&z=17`, '_blank');
-                    }
-                },
-                (error) => {
-                    alert('Could not get your location. Please allow location access and try again.');
-                    console.error('Geolocation error:', error);
-                },
-                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-            );
-        } else {
-            alert('Geolocation is not supported by your browser');
-            window.open('https://www.google.com/maps', '_blank');
+    // Get current location - same as BookingForm
+    const getCurrentLocation = () => {
+        if (!navigator.geolocation) {
+            setLocationError('Geolocation is not supported by your browser');
+            return;
         }
+
+        setLocationLoading(true);
+        setLocationError('');
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                setLocation({ latitude, longitude });
+
+                // Google Maps link for exact pinpoint
+                const mapsLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+
+                try {
+                    // Use OpenStreetMap Nominatim for reverse geocoding
+                    const response = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1&zoom=18`,
+                        {
+                            headers: {
+                                'Accept-Language': 'en'
+                            }
+                        }
+                    );
+                    const data = await response.json();
+
+                    if (data && data.address) {
+                        const addr = data.address;
+                        const parts = [];
+                        if (addr.house_number) parts.push(addr.house_number);
+                        if (addr.road || addr.street) parts.push(addr.road || addr.street);
+                        if (addr.neighbourhood) parts.push(addr.neighbourhood);
+                        if (addr.suburb) parts.push(addr.suburb);
+                        if (addr.city || addr.town || addr.village) parts.push(addr.city || addr.town || addr.village);
+                        if (addr.county || addr.state_district) parts.push(addr.county || addr.state_district);
+                        if (addr.state) parts.push(addr.state);
+                        if (addr.postcode) parts.push(`PIN: ${addr.postcode}`);
+                        if (addr.country) parts.push(addr.country);
+
+                        const fullAddress = parts.length > 0 ? parts.join(', ') : data.display_name;
+
+                        setFormData(prev => ({
+                            ...prev,
+                            pickupAddress: `${fullAddress}\n\n📍 Exact Location: ${mapsLink}`
+                        }));
+                    } else {
+                        setFormData(prev => ({
+                            ...prev,
+                            pickupAddress: `📍 Exact Location: ${mapsLink}`
+                        }));
+                    }
+                } catch (error) {
+                    setFormData(prev => ({
+                        ...prev,
+                        pickupAddress: `📍 Exact Location: ${mapsLink}`
+                    }));
+                }
+                setLocationLoading(false);
+            },
+            (error) => {
+                setLocationError('Could not get your location. Please allow location access.');
+                setLocationLoading(false);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+        );
     };
 
     const handleSubmit = (e) => {
@@ -62,8 +98,7 @@ const Quote = () => {
 Name: ${formData.name}
 Phone: ${formData.phone}
 Service: ${formData.serviceType}
-Pickup: ${formData.pickupLocation}
-Destination: ${formData.destination}
+Pickup: ${formData.pickupAddress}
 Message: ${formData.message}`;
 
         window.open(`https://wa.me/919942000266?text=${encodeURIComponent(message)}`, '_blank');
@@ -155,193 +190,131 @@ Message: ${formData.message}`;
                                     Service Type *
                                 </label>
 
-                                {/* Single Box containing both categories */}
-                                <div
-                                    className="border-2 border-slate-200 rounded-xl bg-white shadow-sm cursor-pointer hover:border-primary-300 transition-all duration-300"
-                                    onClick={() => {
-                                        if (!expandedCategory) {
-                                            setExpandedCategory('emergency'); // Open first option by default
-                                        }
-                                    }}
-                                >
-                                    {/* Header - Select a Type */}
-                                    {!expandedCategory && (
-                                        <div className="p-4 flex items-center justify-between text-slate-500">
-                                            <span className="text-sm">Select a service type...</span>
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                            </svg>
-                                        </div>
-                                    )}
+                                {/* Service Type - Both sections always open */}
+                                <div className="border-2 border-slate-200 rounded-xl bg-white shadow-sm p-4">
 
-                                    {/* Show categories when expanded */}
-                                    {expandedCategory && (
-                                        <div className="p-4" onClick={(e) => e.stopPropagation()}>
-
-                                            {/* Emergency Ambulance - Red Clickable Section */}
-                                            <div
-                                                className={`rounded-xl cursor-pointer transition-all duration-300 ${expandedCategory === 'emergency'
-                                                    ? 'bg-red-50 border-2 border-red-400'
-                                                    : 'hover:bg-red-50/50'
-                                                    }`}
-                                                onClick={() => setExpandedCategory(expandedCategory === 'emergency' ? null : 'emergency')}
-                                            >
-                                                <div className="p-3 flex items-center justify-between">
-                                                    <p className="text-sm font-bold text-red-700 flex items-center gap-2">
-                                                        <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                                                        🚨 Emergency Ambulance
-                                                    </p>
-                                                    <svg
-                                                        className={`w-5 h-5 text-red-600 transition-transform duration-300 ${expandedCategory === 'emergency' ? 'rotate-180' : ''}`}
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                </div>
-
-                                                {/* Expandable Content */}
-                                                {expandedCategory === 'emergency' && (
-                                                    <div className="px-3 pb-3" onClick={(e) => e.stopPropagation()}>
-                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-red-200">
-                                                            {[
-                                                                { value: 'icu', label: 'ICU Ambulance' },
-                                                                { value: 'bls', label: 'BLS Ambulance' },
-                                                                { value: 'neonatal', label: 'Neonatal Ambulance' },
-                                                                { value: 'patient-transfer', label: 'Bed to Bed Patient Transfer' },
-                                                                { value: 'event-standby', label: 'Event Medical Standby' },
-                                                            ].map((type) => (
-                                                                <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
-                                                                    <input
-                                                                        type="radio"
-                                                                        name="serviceType"
-                                                                        value={type.value}
-                                                                        checked={formData.serviceType === type.value}
-                                                                        onChange={handleChange}
-                                                                        className="w-4 h-4 text-red-600 border-red-300 focus:ring-red-500"
-                                                                    />
-                                                                    <span className="ml-2 text-sm text-navy-800">{type.label}</span>
-                                                                </label>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            {/* Divider */}
-                                            <div className="border-t border-slate-200 my-2"></div>
-
-                                            {/* Non-Emergency Transport - Blue Clickable Section */}
-                                            <div
-                                                className={`rounded-xl cursor-pointer transition-all duration-300 ${expandedCategory === 'non-emergency'
-                                                    ? 'bg-blue-50 border-2 border-blue-400'
-                                                    : 'hover:bg-blue-50/50'
-                                                    }`}
-                                                onClick={() => setExpandedCategory(expandedCategory === 'non-emergency' ? null : 'non-emergency')}
-                                            >
-                                                <div className="p-3 flex items-center justify-between">
-                                                    <p className="text-sm font-bold text-blue-700 flex items-center gap-2">
-                                                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                                                        🚐 Non-Emergency Transport
-                                                    </p>
-                                                    <svg
-                                                        className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${expandedCategory === 'non-emergency' ? 'rotate-180' : ''}`}
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                </div>
-
-                                                {/* Expandable Content */}
-                                                {expandedCategory === 'non-emergency' && (
-                                                    <div className="px-3 pb-3" onClick={(e) => e.stopPropagation()}>
-                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-blue-200">
-                                                            {[
-                                                                { value: 'freezer', label: 'Home Freezer Box' },
-                                                                { value: 'mortuary', label: 'Mortuary Van' },
-                                                            ].map((type) => (
-                                                                <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">
-                                                                    <input
-                                                                        type="radio"
-                                                                        name="serviceType"
-                                                                        value={type.value}
-                                                                        checked={formData.serviceType === type.value}
-                                                                        onChange={handleChange}
-                                                                        className="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500"
-                                                                    />
-                                                                    <span className="ml-2 text-sm text-navy-800">{type.label}</span>
-                                                                </label>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
+                                    {/* Emergency Ambulance - Red Section */}
+                                    <div className="bg-red-50 border-2 border-red-400 rounded-xl mb-4">
+                                        <div className="p-3">
+                                            <p className="text-sm font-bold text-red-700 flex items-center gap-2 mb-3">
+                                                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                                                🚨 Emergency Ambulance
+                                            </p>
+                                            <div className="space-y-2">
+                                                {[
+                                                    { value: 'icu', label: 'ICU Ambulance', desc: 'Intensive Care Unit' },
+                                                    { value: 'bls', label: 'BLS Ambulance', desc: 'Basic Life Support' },
+                                                    { value: 'neonatal', label: 'Neonatal Ambulance', desc: 'Specialized for infants' },
+                                                    { value: 'patient-transfer', label: 'Bed to Bed Patient Transfer', desc: 'Hospital to hospital' },
+                                                    { value: 'event-standby', label: 'Event Medical Standby', desc: 'For events & functions' },
+                                                ].map((type) => (
+                                                    <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
+                                                        <input
+                                                            type="radio"
+                                                            name="serviceType"
+                                                            value={type.value}
+                                                            checked={formData.serviceType === type.value}
+                                                            onChange={handleChange}
+                                                            className="w-4 h-4 text-red-600 border-red-300 focus:ring-red-500"
+                                                        />
+                                                        <span className="ml-2 text-sm text-navy-700">
+                                                            <strong className="text-navy-900">{type.label}</strong>
+                                                            <span className="text-navy-500"> - {type.desc}</span>
+                                                        </span>
+                                                    </label>
+                                                ))}
                                             </div>
                                         </div>
-                                    )}
+                                    </div>
+
+                                    {/* Non-Emergency Transport - Blue Section */}
+                                    <div className="bg-blue-50 border-2 border-blue-400 rounded-xl">
+                                        <div className="p-3">
+                                            <p className="text-sm font-bold text-blue-700 flex items-center gap-2 mb-3">
+                                                <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                                                🚐 Non-Emergency Transport
+                                            </p>
+                                            <div className="space-y-2">
+                                                {[
+                                                    { value: 'freezer', label: 'Home Freezer Box', desc: 'Temperature controlled at home' },
+                                                    { value: 'mortuary', label: 'Mortuary Van', desc: 'Deceased transport' },
+                                                ].map((type) => (
+                                                    <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">
+                                                        <input
+                                                            type="radio"
+                                                            name="serviceType"
+                                                            value={type.value}
+                                                            checked={formData.serviceType === type.value}
+                                                            onChange={handleChange}
+                                                            className="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500"
+                                                        />
+                                                        <span className="ml-2 text-sm text-navy-700">
+                                                            <strong className="text-navy-900">{type.label}</strong>
+                                                            <span className="text-navy-500"> - {type.desc}</span>
+                                                        </span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* Pickup Location */}
+                            {/* Pickup Address */}
                             <div>
                                 <label htmlFor="pickupLocation" className="block text-sm font-semibold text-navy-800 mb-2">
-                                    Pickup Location
+                                    Pickup Address *
                                 </label>
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        id="pickupLocation"
-                                        name="pickupLocation"
-                                        value={formData.pickupLocation}
-                                        onChange={handleChange}
-                                        className="form-input flex-1"
-                                        placeholder="Enter address or select from map"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={openGoogleMaps}
-                                        className="px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center gap-2"
-                                        title="Open Google Maps"
-                                    >
-                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                                        </svg>
-                                        <span className="hidden sm:inline">Map</span>
-                                    </button>
-                                </div>
-                                <p className="text-xs text-navy-500 mt-1">Tap Map icon to open Google Maps, then copy-paste the address</p>
-                            </div>
+                                <textarea
+                                    id="pickupAddress"
+                                    name="pickupAddress"
+                                    value={formData.pickupAddress}
+                                    onChange={handleChange}
+                                    rows={3}
+                                    className="form-input w-full resize-none"
+                                    placeholder="Complete pickup address with landmarks"
+                                />
 
-                            {/* Destination */}
-                            <div>
-                                <label htmlFor="destination" className="block text-sm font-semibold text-navy-800 mb-2">
-                                    Destination
-                                </label>
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        id="destination"
-                                        name="destination"
-                                        value={formData.destination}
-                                        onChange={handleChange}
-                                        className="form-input flex-1"
-                                        placeholder="Hospital or destination address"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={openGoogleMaps}
-                                        className="px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all flex items-center gap-2"
-                                        title="Open Google Maps"
-                                    >
-                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                                        </svg>
-                                        <span className="hidden sm:inline">Map</span>
-                                    </button>
-                                </div>
-                                <p className="text-xs text-navy-500 mt-1">Tap Map icon to open Google Maps, then copy-paste the address</p>
+                                {/* Use My Current Location Button - same as BookingForm */}
+                                <button
+                                    type="button"
+                                    onClick={getCurrentLocation}
+                                    disabled={locationLoading}
+                                    className={`mt-3 flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all duration-300 ${location
+                                        ? 'bg-green-50 border-green-500 text-green-700'
+                                        : 'bg-white border-primary-500 text-primary-600 hover:bg-primary-50'
+                                        } ${locationLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                >
+                                    {locationLoading ? (
+                                        <>
+                                            <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Getting Location...
+                                        </>
+                                    ) : location ? (
+                                        <>
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                            </svg>
+                                            Location Captured
+                                        </>
+                                    ) : (
+                                        <>
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
+                                            </svg>
+                                            Use My Current Location
+                                        </>
+                                    )}
+                                </button>
+                                {locationError && <p className="text-primary-600 text-sm mt-2">{locationError}</p>}
+                                {location && (
+                                    <p className="text-green-600 text-sm mt-2">
+                                        ✓ Location saved! Will be shared with booking details.
+                                    </p>
+                                )}
                             </div>
 
                             {/* Message */}
@@ -355,7 +328,7 @@ Message: ${formData.message}`;
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows={4}
-                                    className="form-input resize-none"
+                                    className="form-input w-full resize-none"
                                     placeholder="Any specific requirements or questions..."
                                 />
                             </div>
