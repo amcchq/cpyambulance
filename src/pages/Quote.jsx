@@ -18,6 +18,13 @@ const Quote = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    // Open Google Maps for location selection
+    const openGoogleMaps = () => {
+        // Opens Google Maps with search - user can pick location
+        const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=';
+        window.open(mapsUrl, '_blank');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -40,7 +47,9 @@ Message: ${formData.message}`;
             <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
                 <div className="card p-8 md:p-12 text-center max-w-md">
                     <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
-                        <span className="text-4xl">✓</span>
+                        <svg className="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                        </svg>
                     </div>
                     <h2 className="text-2xl font-bold text-navy-900 mb-4">Quote Request Sent!</h2>
                     <p className="text-navy-600 mb-8">
@@ -157,15 +166,29 @@ Message: ${formData.message}`;
                                 <label htmlFor="pickupLocation" className="block text-sm font-semibold text-navy-800 mb-2">
                                     Pickup Location
                                 </label>
-                                <input
-                                    type="text"
-                                    id="pickupLocation"
-                                    name="pickupLocation"
-                                    value={formData.pickupLocation}
-                                    onChange={handleChange}
-                                    className="form-input"
-                                    placeholder="Address or area"
-                                />
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        id="pickupLocation"
+                                        name="pickupLocation"
+                                        value={formData.pickupLocation}
+                                        onChange={handleChange}
+                                        className="form-input flex-1"
+                                        placeholder="Enter address or select from map"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={openGoogleMaps}
+                                        className="px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center gap-2"
+                                        title="Open Google Maps"
+                                    >
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                        </svg>
+                                        <span className="hidden sm:inline">Map</span>
+                                    </button>
+                                </div>
+                                <p className="text-xs text-navy-500 mt-1">Tap Map icon to open Google Maps, then copy-paste the address</p>
                             </div>
 
                             {/* Destination */}
@@ -173,15 +196,29 @@ Message: ${formData.message}`;
                                 <label htmlFor="destination" className="block text-sm font-semibold text-navy-800 mb-2">
                                     Destination
                                 </label>
-                                <input
-                                    type="text"
-                                    id="destination"
-                                    name="destination"
-                                    value={formData.destination}
-                                    onChange={handleChange}
-                                    className="form-input"
-                                    placeholder="Hospital or destination address"
-                                />
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        id="destination"
+                                        name="destination"
+                                        value={formData.destination}
+                                        onChange={handleChange}
+                                        className="form-input flex-1"
+                                        placeholder="Hospital or destination address"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={openGoogleMaps}
+                                        className="px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all flex items-center gap-2"
+                                        title="Open Google Maps"
+                                    >
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                        </svg>
+                                        <span className="hidden sm:inline">Map</span>
+                                    </button>
+                                </div>
+                                <p className="text-xs text-navy-500 mt-1">Tap Map icon to open Google Maps, then copy-paste the address</p>
                             </div>
 
                             {/* Message */}
@@ -202,7 +239,7 @@ Message: ${formData.message}`;
 
                             {/* Submit Button */}
                             <button type="submit" className="btn-primary w-full">
-                                Request Quote
+                                Request Quote via WhatsApp
                             </button>
                         </form>
                     </div>
