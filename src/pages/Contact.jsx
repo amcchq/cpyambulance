@@ -24,9 +24,11 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold text-navy-900 mb-6">Emergency Contact</h2>
 
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-primary-50 transition-colors group">
-                    <div className="icon-box flex-shrink-0">
-                      <span className="text-2xl">📞</span>
+                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                      </svg>
                     </div>
                     <div>
                       <h3 className="font-bold text-navy-900 mb-1">Emergency Hotline</h3>
@@ -40,9 +42,11 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-primary-50 transition-colors group">
-                    <div className="icon-box flex-shrink-0">
-                      <span className="text-2xl">📧</span>
+                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                      </svg>
                     </div>
                     <div>
                       <h3 className="font-bold text-navy-900 mb-1">Email Support</h3>
@@ -56,9 +60,11 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-primary-50 transition-colors group">
-                    <div className="icon-box flex-shrink-0">
-                      <span className="text-2xl">📍</span>
+                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                      </svg>
                     </div>
                     <div>
                       <h3 className="font-bold text-navy-900 mb-1">Service Area</h3>
@@ -118,10 +124,16 @@ const Contact = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="tel:+919942000266" className="btn-primary">
-                  📞 Call Emergency Now
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                  </svg>
+                  Call Emergency Now
                 </a>
                 <a href="/book" className="btn-secondary">
-                  🚑 Book Ambulance Online
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5H15V3H9v2H6.5c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
+                  </svg>
+                  Book Ambulance Online
                 </a>
               </div>
             </div>

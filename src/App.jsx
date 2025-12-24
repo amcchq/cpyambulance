@@ -4,12 +4,14 @@ import NavigationHandler from './components/NavigationHandler';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import FloatingButtons from './components/FloatingButtons';
 
 // Lazy load pages (no artificial delay - natural loading)
 const Home = lazy(() => import('./pages/Home'));
 const Book = lazy(() => import('./pages/Book'));
 const Contact = lazy(() => import('./pages/Contact'));
 const About = lazy(() => import('./pages/About'));
+const Quote = lazy(() => import('./pages/Quote'));
 
 // Full page loading wrapper
 const FullPageLoader = () => {
@@ -38,6 +40,7 @@ const AppContent = () => {
   return (
     <>
       <NavigationHandler />
+      <FloatingButtons />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
@@ -47,6 +50,7 @@ const AppContent = () => {
               <Route path="/book" element={<Book />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
+              <Route path="/quote" element={<Quote />} />
             </Routes>
           </Suspense>
         </main>
