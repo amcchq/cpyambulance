@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-slate-50;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+
+  /* Premium Card */
+  .card {
+    @apply bg-white rounded-2xl shadow-card;
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .card:hover {
+    @apply shadow-card-hover;
+    transform: translateY(-8px);
+  }
+
+  /* Primary Button - Red */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-8 py-4 rounded-full font-semibold text-white;
+    @apply bg-primary-600 hover:bg-primary-700;
+    @apply transition-all duration-300 ease-out;
+    @apply shadow-lg shadow-primary-600/30;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    @apply shadow-xl shadow-primary-600/40;
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary Button - Outline */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-8 py-4 rounded-full font-semibold;
+    @apply bg-white text-navy-800 border-2 border-navy-200;
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .btn-secondary:hover {
+    @apply border-primary-600 text-primary-600 bg-primary-50;
+    transform: translateY(-2px);
+  }
+
+  /* Section Title */
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900;
+    @apply leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-navy-600 max-w-2xl;
+    @apply leading-relaxed;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-2 px-4 py-2;
+    @apply bg-primary-100 text-primary-700 rounded-full;
+    @apply text-sm font-semibold;
+  }
+
+  /* Icon Box */
+  .icon-box {
+    @apply inline-flex items-center justify-center;
+    @apply w-16 h-16 rounded-2xl;
+    @apply bg-primary-100 text-primary-600;
+    @apply transition-all duration-300;
+  }
+
+  .group:hover .icon-box {
+    @apply bg-primary-600 text-white;
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  /* Form Inputs */
+  .form-input {
+    @apply w-full px-5 py-4 rounded-xl;
+    @apply border-2 border-slate-200 bg-white;
+    @apply text-navy-800 placeholder-slate-400;
+    @apply transition-all duration-300;
+    @apply focus:outline-none focus:border-primary-500;
+    @apply focus:ring-4 focus:ring-primary-100;
+  }
+
+  /* Stats */
+  .stat-number {
+    @apply text-4xl md:text-5xl font-black text-primary-600;
+    @apply leading-none;
+  }
+
+  .stat-label {
+    @apply text-sm font-medium text-navy-600 uppercase tracking-wider mt-2;
+  }
+
+  /* Animations */
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  /* Emergency Banner */
+  .emergency-banner {
+    @apply bg-primary-600 text-white py-3 px-4;
+    @apply flex items-center justify-center gap-3;
+    @apply text-sm font-medium;
+  }
+
+  /* Navbar Glass Effect */
+  .navbar-glass {
+    @apply bg-white/95 backdrop-blur-lg;
+    @apply border-b border-slate-100;
+    @apply shadow-soft;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Selection */
+::selection {
+  background: rgba(220, 38, 38, 0.15);
+  color: #991b1b;
+}

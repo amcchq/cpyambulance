@@ -1,0 +1,6 @@
+# CPY Ambulance Environment Variables
+VITE_APP_TITLE="CPY Ambulance"
+VITE_WHATSAPP_NUMBER="+919942000266"
+VITE_PHONE_NUMBER="+91-9942000266"
+VITE_EMAIL="support@cpyambulance.example"
+VITE_ADDRESS="Gurugram, Haryana, India"
