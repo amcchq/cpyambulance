@@ -11,6 +11,7 @@ const Quote = () => {
     });
 
     const [submitted, setSubmitted] = useState(false);
+    const [expandedCategory, setExpandedCategory] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -148,67 +149,138 @@ Message: ${formData.message}`;
                                     />
                                 </div>
                             </div>
-
                             {/* Service Type */}
                             <div>
                                 <label className="block text-sm font-semibold text-navy-800 mb-3">
                                     Service Type *
                                 </label>
 
-                                {/* Emergency Ambulance - Red Box */}
-                                <div className="border-2 border-red-300 rounded-xl p-4 mb-4 bg-red-50">
-                                    <p className="text-sm font-bold text-red-700 mb-3 flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                                        🚨 Emergency Ambulance
-                                    </p>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        {[
-                                            { value: 'emergency', label: 'Emergency Ambulance' },
-                                            { value: 'icu', label: 'ICU Ambulance' },
-                                            { value: 'bls', label: 'BLS Ambulance' },
-                                            { value: 'neonatal', label: 'Neonatal Ambulance' },
-                                            { value: 'patient-transfer', label: 'Patient Transfer' },
-                                            { value: 'event-standby', label: 'Event Medical Standby' },
-                                        ].map((type) => (
-                                            <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
-                                                <input
-                                                    type="radio"
-                                                    name="serviceType"
-                                                    value={type.value}
-                                                    checked={formData.serviceType === type.value}
-                                                    onChange={handleChange}
-                                                    className="w-4 h-4 text-red-600 border-red-300 focus:ring-red-500"
-                                                />
-                                                <span className="ml-2 text-sm text-navy-800">{type.label}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
+                                {/* Single Box containing both categories */}
+                                <div
+                                    className="border-2 border-slate-200 rounded-xl bg-white shadow-sm cursor-pointer hover:border-primary-300 transition-all duration-300"
+                                    onClick={() => {
+                                        if (!expandedCategory) {
+                                            setExpandedCategory('emergency'); // Open first option by default
+                                        }
+                                    }}
+                                >
+                                    {/* Header - Select a Type */}
+                                    {!expandedCategory && (
+                                        <div className="p-4 flex items-center justify-between text-slate-500">
+                                            <span className="text-sm">Select a service type...</span>
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    )}
 
-                                {/* Non-Emergency Transport - Blue Box */}
-                                <div className="border-2 border-blue-300 rounded-xl p-4 bg-blue-50">
-                                    <p className="text-sm font-bold text-blue-700 mb-3 flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                                        🚐 Non-Emergency Transport
-                                    </p>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        {[
-                                            { value: 'freezer', label: 'Freezer Van' },
-                                            { value: 'mortuary', label: 'Mortuary Van' },
-                                        ].map((type) => (
-                                            <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">
-                                                <input
-                                                    type="radio"
-                                                    name="serviceType"
-                                                    value={type.value}
-                                                    checked={formData.serviceType === type.value}
-                                                    onChange={handleChange}
-                                                    className="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500"
-                                                />
-                                                <span className="ml-2 text-sm text-navy-800">{type.label}</span>
-                                            </label>
-                                        ))}
-                                    </div>
+                                    {/* Show categories when expanded */}
+                                    {expandedCategory && (
+                                        <div className="p-4" onClick={(e) => e.stopPropagation()}>
+
+                                            {/* Emergency Ambulance - Red Clickable Section */}
+                                            <div
+                                                className={`rounded-xl cursor-pointer transition-all duration-300 ${expandedCategory === 'emergency'
+                                                    ? 'bg-red-50 border-2 border-red-400'
+                                                    : 'hover:bg-red-50/50'
+                                                    }`}
+                                                onClick={() => setExpandedCategory(expandedCategory === 'emergency' ? null : 'emergency')}
+                                            >
+                                                <div className="p-3 flex items-center justify-between">
+                                                    <p className="text-sm font-bold text-red-700 flex items-center gap-2">
+                                                        <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                                                        🚨 Emergency Ambulance
+                                                    </p>
+                                                    <svg
+                                                        className={`w-5 h-5 text-red-600 transition-transform duration-300 ${expandedCategory === 'emergency' ? 'rotate-180' : ''}`}
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                    </svg>
+                                                </div>
+
+                                                {/* Expandable Content */}
+                                                {expandedCategory === 'emergency' && (
+                                                    <div className="px-3 pb-3" onClick={(e) => e.stopPropagation()}>
+                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-red-200">
+                                                            {[
+                                                                { value: 'icu', label: 'ICU Ambulance' },
+                                                                { value: 'bls', label: 'BLS Ambulance' },
+                                                                { value: 'neonatal', label: 'Neonatal Ambulance' },
+                                                                { value: 'patient-transfer', label: 'Patient Transfer' },
+                                                                { value: 'event-standby', label: 'Event Medical Standby' },
+                                                            ].map((type) => (
+                                                                <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-red-100 transition-colors duration-200">
+                                                                    <input
+                                                                        type="radio"
+                                                                        name="serviceType"
+                                                                        value={type.value}
+                                                                        checked={formData.serviceType === type.value}
+                                                                        onChange={handleChange}
+                                                                        className="w-4 h-4 text-red-600 border-red-300 focus:ring-red-500"
+                                                                    />
+                                                                    <span className="ml-2 text-sm text-navy-800">{type.label}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Divider */}
+                                            <div className="border-t border-slate-200 my-2"></div>
+
+                                            {/* Non-Emergency Transport - Blue Clickable Section */}
+                                            <div
+                                                className={`rounded-xl cursor-pointer transition-all duration-300 ${expandedCategory === 'non-emergency'
+                                                    ? 'bg-blue-50 border-2 border-blue-400'
+                                                    : 'hover:bg-blue-50/50'
+                                                    }`}
+                                                onClick={() => setExpandedCategory(expandedCategory === 'non-emergency' ? null : 'non-emergency')}
+                                            >
+                                                <div className="p-3 flex items-center justify-between">
+                                                    <p className="text-sm font-bold text-blue-700 flex items-center gap-2">
+                                                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                                                        🚐 Non-Emergency Transport
+                                                    </p>
+                                                    <svg
+                                                        className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${expandedCategory === 'non-emergency' ? 'rotate-180' : ''}`}
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                    </svg>
+                                                </div>
+
+                                                {/* Expandable Content */}
+                                                {expandedCategory === 'non-emergency' && (
+                                                    <div className="px-3 pb-3" onClick={(e) => e.stopPropagation()}>
+                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-blue-200">
+                                                            {[
+                                                                { value: 'freezer', label: 'Freezer Van' },
+                                                                { value: 'mortuary', label: 'Mortuary Van' },
+                                                            ].map((type) => (
+                                                                <label key={type.value} className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-blue-100 transition-colors duration-200">
+                                                                    <input
+                                                                        type="radio"
+                                                                        name="serviceType"
+                                                                        value={type.value}
+                                                                        checked={formData.serviceType === type.value}
+                                                                        onChange={handleChange}
+                                                                        className="w-4 h-4 text-blue-600 border-blue-300 focus:ring-blue-500"
+                                                                    />
+                                                                    <span className="ml-2 text-sm text-navy-800">{type.label}</span>
+                                                                </label>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
