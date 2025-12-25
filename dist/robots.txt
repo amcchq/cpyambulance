@@ -1,0 +1,22 @@
+# CPY Ambulance - Robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://cpyambulance.com/sitemap.xml
+
+# Disallow admin and private paths (if any)
+Disallow: /api/
+Disallow: /_*
+Disallow: /node_modules/
+
+# Allow important pages
+Allow: /book
+Allow: /contact
+Allow: /about
+Allow: /quote
+
+# Crawl delay for politeness
+Crawl-delay: 1

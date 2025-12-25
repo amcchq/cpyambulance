@@ -13,6 +13,8 @@ const Contact = lazy(() => import('./pages/Contact'));
 const About = lazy(() => import('./pages/About'));
 const Quote = lazy(() => import('./pages/Quote'));
 const FAQ = lazy(() => import('./pages/FAQ'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 
 // Full page loading wrapper
 const FullPageLoader = () => {
@@ -53,6 +55,8 @@ const AppContent = () => {
               <Route path="/about" element={<About />} />
               <Route path="/quote" element={<Quote />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
             </Routes>
           </Suspense>
         </main>
