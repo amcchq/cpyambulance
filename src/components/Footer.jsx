@@ -5,27 +5,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-navy-900 text-white">
-      {/* CTA Section */}
-      <div className="bg-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">Need Emergency Help?</h3>
-              <p className="text-white/80">Our team is available 24/7 to assist you</p>
-            </div>
-            <a
-              href="tel:+919942000266"
-              className="flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-full font-bold hover:bg-navy-900 hover:text-white transition-all duration-300 shadow-lg"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-              </svg>
-              Call +91-9942000266
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
