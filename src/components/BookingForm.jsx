@@ -302,7 +302,7 @@ Please confirm my booking.`;
             disabled={locationLoading}
             className={`mt-3 flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all duration-300 ${location
               ? 'bg-green-50 border-green-500 text-green-700'
-              : 'bg-cream-50 border-primary-500 text-primary-600 hover:bg-primary-50'
+              : 'bg-white border-primary-500 text-primary-600 hover:bg-primary-50'
               } ${locationLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
             {locationLoading ? (

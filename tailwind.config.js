@@ -16,32 +16,33 @@ export default {
           400: '#D2C2A9',  // Medium
           500: '#C6B396',  // Darker cream
         },
+        // Ambons Primary - Hot Pink/Magenta (Professional Ambulance)
         primary: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
-          950: '#450a0a',
+          50: '#FDF2F8',
+          100: '#FCE7F3',
+          200: '#FBCFE8',
+          300: '#F9A8D4',
+          400: '#F472B6',
+          500: '#EC4899',
+          600: '#E91E63',  // Main Ambons pink
+          700: '#DB2777',
+          800: '#9D174D',
+          900: '#831843',
+          950: '#500724',
         },
-        // Dark Navy for contrast
+        // Ambons Navy - Dark professional blue
         navy: {
-          50: '#f0f4f8',
-          100: '#d9e2ec',
-          200: '#bcccdc',
-          300: '#9fb3c8',
-          400: '#829ab1',
-          500: '#627d98',
-          600: '#486581',
-          700: '#334e68',
-          800: '#243b53',
-          900: '#102a43',
-          950: '#0a1929',
+          50: '#F5F7FF',   // Light lavender background (Ambons section bg)
+          100: '#E0E7FF',
+          200: '#C7D2FE',
+          300: '#A5B4FC',
+          400: '#818CF8',
+          500: '#6366F1',
+          600: '#4F46E5',
+          700: '#3730A3',
+          800: '#1E293B',  // Main heading color
+          900: '#0F172A',  // Darkest navy (Ambons headings)
+          950: '#0A1128',  // Extra dark
         },
       },
       fontFamily: {
