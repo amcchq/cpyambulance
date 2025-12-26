@@ -37,14 +37,14 @@ const FloatingButtons = () => {
                 </svg>
             </button>
 
-            {/* Call Button with Red Wave */}
-            <div className="relative">
-                {/* Pulsing Wave */}
-                <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75"></span>
-                <span className="absolute inset-0 rounded-full bg-red-400 animate-pulse opacity-50"></span>
+            {/* Call Button with Subtle Ring Wave */}
+            <div className="relative group">
+                {/* Subtle Ring Animation - Smaller & Unique */}
+                <span className="absolute -inset-1 rounded-full border-2 border-primary-400 animate-[ping_2s_ease-out_infinite] opacity-40"></span>
+                <span className="absolute -inset-0.5 rounded-full border border-primary-300 animate-[pulse_1.5s_ease-in-out_infinite] opacity-30"></span>
                 <a
                     href="tel:+919942000266"
-                    className="relative w-12 h-12 md:w-12 md:h-12 bg-primary-600 text-white rounded-full shadow-lg shadow-primary-600/40 flex items-center justify-center hover:bg-primary-700 active:scale-95 hover:scale-110 transition-all duration-300"
+                    className="relative w-12 h-12 md:w-12 md:h-12 bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-full shadow-lg shadow-primary-600/40 flex items-center justify-center hover:from-primary-600 hover:to-primary-800 active:scale-95 hover:scale-110 transition-all duration-300"
                     aria-label="Call Now"
                 >
                     <svg className="w-6 h-6 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -53,16 +53,16 @@ const FloatingButtons = () => {
                 </a>
             </div>
 
-            {/* WhatsApp Button with Green Wave */}
-            <div className="relative">
-                {/* Pulsing Wave */}
-                <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
-                <span className="absolute inset-0 rounded-full bg-green-400 animate-pulse opacity-50"></span>
+            {/* WhatsApp Button with Subtle Ring Wave */}
+            <div className="relative group">
+                {/* Subtle Ring Animation - Smaller & Unique */}
+                <span className="absolute -inset-1 rounded-full border-2 border-green-400 animate-[ping_2s_ease-out_infinite] opacity-40" style={{ animationDelay: '0.5s' }}></span>
+                <span className="absolute -inset-0.5 rounded-full border border-green-300 animate-[pulse_1.5s_ease-in-out_infinite] opacity-30" style={{ animationDelay: '0.25s' }}></span>
                 <a
                     href="https://wa.me/919942000266?text=Hi,%20I%20need%20ambulance%20service."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative w-12 h-12 md:w-12 md:h-12 bg-green-500 text-white rounded-full shadow-lg shadow-green-500/40 flex items-center justify-center hover:bg-green-600 active:scale-95 hover:scale-110 transition-all duration-300"
+                    className="relative w-12 h-12 md:w-12 md:h-12 bg-gradient-to-br from-green-400 to-green-600 text-white rounded-full shadow-lg shadow-green-500/40 flex items-center justify-center hover:from-green-500 hover:to-green-700 active:scale-95 hover:scale-110 transition-all duration-300"
                     aria-label="Chat on WhatsApp"
                 >
                     <svg className="w-6 h-6 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
