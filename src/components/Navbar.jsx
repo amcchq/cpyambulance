@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-glass' : 'bg-white'}`}>
+      <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-glass' : 'bg-cream-50/60 backdrop-blur-sm'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo - NOW VISIBLE ON MOBILE */}
@@ -78,7 +78,7 @@ const Navbar = () => {
               {/* Premium Call Now Button */}
               <a
                 href="tel:+919942000266"
-                className="ml-4 flex items-center gap-2 px-6 py-3 bg-white text-primary-600 font-bold rounded-full border-2 border-primary-600 hover:bg-primary-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 animate-subtle-bounce"
+                className="ml-4 flex items-center gap-2 px-6 py-3 bg-cream-50 text-primary-600 font-bold rounded-full border-2 border-primary-600 hover:bg-primary-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 animate-subtle-bounce"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />

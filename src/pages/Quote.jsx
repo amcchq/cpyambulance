@@ -107,7 +107,7 @@ Message: ${formData.message}`;
 
     if (submitted) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
+            <div className="min-h-screen bg-cream-100 flex items-center justify-center px-4">
                 <div className="card p-8 md:p-12 text-center max-w-md">
                     <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
                         <svg className="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@ Message: ${formData.message}`;
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 animate-fade-in">
+        <div className="min-h-screen bg-cream-100 animate-fade-in">
             {/* Header */}
             <div className="bg-navy-900 text-white py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto text-center">
@@ -191,7 +191,7 @@ Message: ${formData.message}`;
                                 </label>
 
                                 {/* Service Type - Both sections always open */}
-                                <div className="border-2 border-slate-200 rounded-xl bg-white shadow-sm p-4">
+                                <div className="border-2 border-cream-200 rounded-xl bg-cream-50 shadow-sm p-4">
 
                                     {/* Emergency Ambulance - Red Section */}
                                     <div className="bg-red-50 border-2 border-red-400 rounded-xl mb-4">
@@ -282,7 +282,7 @@ Message: ${formData.message}`;
                                     disabled={locationLoading}
                                     className={`mt-3 flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all duration-300 ${location
                                         ? 'bg-green-50 border-green-500 text-green-700'
-                                        : 'bg-white border-primary-500 text-primary-600 hover:bg-primary-50'
+                                        : 'bg-cream-50 border-primary-500 text-primary-600 hover:bg-primary-50'
                                         } ${locationLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
                                 >
                                     {locationLoading ? (

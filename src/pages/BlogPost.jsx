@@ -22,7 +22,7 @@ const BlogPost = () => {
 
     if (!post) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+            <div className="min-h-screen flex items-center justify-center bg-cream-100">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold text-navy-900 mb-4">Article Not Found</h1>
                     <p className="text-slate-600 mb-6">The article you're looking for doesn't exist.</p>
@@ -60,7 +60,7 @@ const BlogPost = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-cream-100">
             {/* Hero Image */}
             <div className="relative h-72 md:h-96 lg:h-[28rem] overflow-hidden">
                 <img
@@ -85,7 +85,7 @@ const BlogPost = () => {
             {/* Article Content */}
             <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10">
                 {/* Article Header */}
-                <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-8">
+                <div className="bg-cream-50 rounded-2xl shadow-xl p-6 md:p-10 mb-8">
                     <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 ${getCategoryStyles(post.category)}`}>
                         {post.category}
                     </span>
@@ -116,7 +116,7 @@ const BlogPost = () => {
                 </div>
 
                 {/* Article Body */}
-                <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 mb-8">
+                <div className="bg-cream-50 rounded-2xl shadow-lg p-6 md:p-10 mb-8">
                     <div
                         className="prose prose-lg max-w-none prose-headings:text-navy-900 prose-headings:font-bold prose-p:text-slate-600 prose-p:leading-relaxed prose-a:text-primary-600 prose-strong:text-navy-800 prose-ul:text-slate-600 prose-li:marker:text-primary-500"
                         dangerouslySetInnerHTML={{
@@ -178,7 +178,7 @@ const BlogPost = () => {
                     <p className="text-white/90 mb-6">Our ambulances are available 24/7 across Bihar</p>
                     <a
                         href="tel:+919942000266"
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-xl font-bold hover:bg-slate-100 transition-all"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-cream-50 text-primary-600 rounded-xl font-bold hover:bg-cream-200 transition-all"
                     >
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
@@ -196,7 +196,7 @@ const BlogPost = () => {
                                 <Link
                                     key={relPost.id}
                                     to={`/blog/${relPost.slug}`}
-                                    className="group flex gap-4 bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all border border-slate-100"
+                                    className="group flex gap-4 bg-cream-50 rounded-xl p-4 shadow-md hover:shadow-lg transition-all border border-cream-200"
                                 >
                                     <img
                                         src={relPost.image}

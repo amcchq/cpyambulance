@@ -49,7 +49,7 @@ const About = () => {
       </div>
 
       {/* Mission Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-cream-50">
         <div className="max-w-4xl mx-auto">
           <div className="card p-8 md:p-12 text-center">
             <div className="badge mb-6 mx-auto">Our Mission</div>
@@ -139,7 +139,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-cream-50">
         <div className="max-w-4xl mx-auto text-center">
           <div className="card p-8 md:p-12">
             <h2 className="section-title mb-4">Ready to Experience Our Service?</h2>

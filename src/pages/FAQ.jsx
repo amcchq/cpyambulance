@@ -74,7 +74,7 @@ const FAQ = () => {
             </section>
 
             {/* FAQ Section */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-cream-100">
                 <div className="max-w-4xl mx-auto">
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
@@ -84,7 +84,7 @@ const FAQ = () => {
                             >
                                 <button
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors"
+                                    className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-cream-100 transition-colors"
                                 >
                                     <h3 className="text-lg font-semibold text-navy-900 pr-4">
                                         {faq.question}
@@ -123,7 +123,7 @@ const FAQ = () => {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="tel:+919942000266"
-                            className="flex items-center justify-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-full font-bold hover:bg-navy-900 hover:text-white transition-all duration-300 shadow-lg"
+                            className="flex items-center justify-center gap-2 bg-cream-50 text-primary-600 px-8 py-4 rounded-full font-bold hover:bg-navy-900 hover:text-white transition-all duration-300 shadow-lg"
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />

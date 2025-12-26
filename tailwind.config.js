@@ -7,7 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        
+        // Cream color palette for backgrounds (replacing white)
+        cream: {
+          50: '#FAF8F5',   // Lightest - for subtle backgrounds
+          100: '#F5F0E8',  // Light cream
+          200: '#EAE0CF',  // Main cream color (client specified)
+          300: '#DED1BC',  // Slightly darker
+          400: '#D2C2A9',  // Medium
+          500: '#C6B396',  // Darker cream
+        },
         primary: {
           50: '#fef2f2',
           100: '#fee2e2',

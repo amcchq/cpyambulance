@@ -31,12 +31,12 @@ const Blog = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+        <div className="min-h-screen bg-gradient-to-b from-cream-100 to-cream-50">
             {/* Hero Section */}
             <section className="relative py-16 md:py-24 bg-gradient-to-br from-navy-900 via-navy-800 to-primary-900 overflow-hidden">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+                    <div className="absolute top-10 left-10 w-72 h-72 bg-cream-50 rounded-full blur-3xl"></div>
                     <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary-500 rounded-full blur-3xl"></div>
                 </div>
 
@@ -60,7 +60,7 @@ const Blog = () => {
             {/* Featured Post */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 mb-16">
                 <Link to={`/blog/${featuredPost.slug}`} className="block group">
-                    <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <div className="bg-cream-50 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-cream-200">
                         <div className="md:flex">
                             <div className="md:w-1/2">
                                 <div className="h-64 md:h-full overflow-hidden">
@@ -113,8 +113,8 @@ const Blog = () => {
                             key={category}
                             onClick={() => setSelectedCategory(category)}
                             className={`px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${selectedCategory === category
-                                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
-                                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                                ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30'
+                                : 'bg-cream-50 text-slate-600 hover:bg-cream-200 border border-cream-200'
                                 }`}
                         >
                             {category}
@@ -132,7 +132,7 @@ const Blog = () => {
                             to={`/blog/${post.slug}`}
                             className="group"
                         >
-                            <article className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 h-full flex flex-col">
+                            <article className="bg-cream-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-cream-200 h-full flex flex-col">
                                 <div className="h-48 overflow-hidden">
                                     <img
                                         src={post.image}
@@ -178,7 +178,7 @@ const Blog = () => {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="tel:+919942000266"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-xl font-bold hover:bg-slate-100 transition-all shadow-xl"
+                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cream-50 text-primary-600 rounded-xl font-bold hover:bg-cream-200 transition-all shadow-xl"
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
