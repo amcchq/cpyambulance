@@ -24,7 +24,7 @@ const FloatingButtons = () => {
     };
 
     return (
-        <div className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col gap-3 md:gap-3 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className={`fixed bottom-24 right-4 md:bottom-8 md:right-6 z-50 flex flex-col gap-3 md:gap-3 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {/* Scroll to Top */}
             <button
                 onClick={scrollToTop}
