@@ -16,6 +16,14 @@ const FAQ = lazy(() => import('./pages/FAQ'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 
+// Admin pages (lazy loaded)
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AdminBookings = lazy(() => import('./pages/admin/AdminBookings'));
+const AdminQuotes = lazy(() => import('./pages/admin/AdminQuotes'));
+const AdminContacts = lazy(() => import('./pages/admin/AdminContacts'));
+
 // Full page loading wrapper
 const FullPageLoader = () => {
   return (
@@ -38,7 +46,7 @@ const PageLoader = () => {
   );
 };
 
-// App content that shows after loading
+// Public website content
 const AppContent = () => {
   return (
     <>
@@ -83,7 +91,21 @@ function App() {
 
   return (
     <Router>
-      <AppContent />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          {/* Admin Routes - No navbar/footer */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="bookings" element={<AdminBookings />} />
+            <Route path="quotes" element={<AdminQuotes />} />
+            <Route path="contacts" element={<AdminContacts />} />
+          </Route>
+
+          {/* Public Routes - With navbar/footer */}
+          <Route path="/*" element={<AppContent />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

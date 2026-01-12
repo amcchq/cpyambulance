@@ -110,17 +110,29 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-slate-400 text-sm">
             <p>&copy; {currentYear} CPY Ambulance. All rights reserved.</p>
-            <p>
-              Designed & Developed by{' '}
-              <a
-                href="https://www.instagram.com/faizdecoded/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-500 font-medium hover:text-primary-400 hover:underline transition-colors"
+            <div className="flex items-center gap-4">
+              <Link
+                to="/admin"
+                className="text-slate-500 hover:text-primary-400 transition-colors flex items-center gap-1"
               >
-                Faiz
-              </a>
-            </p>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Admin
+              </Link>
+              <span className="text-slate-600">|</span>
+              <p>
+                Designed & Developed by{' '}
+                <a
+                  href="https://www.instagram.com/faizdecoded/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-500 font-medium hover:text-primary-400 hover:underline transition-colors"
+                >
+                  Faiz
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

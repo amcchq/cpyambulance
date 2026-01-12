@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createQuote } from '../firebase/quoteService';
 
 const Quote = () => {
     const [formData, setFormData] = useState({
@@ -90,8 +91,15 @@ const Quote = () => {
         );
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        try {
+            // Save to Firebase database
+            await createQuote(formData);
+        } catch (error) {
+            console.error('Error saving quote:', error);
+        }
 
         // Create WhatsApp message
         const message = `Quote Request:

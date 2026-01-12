@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { submitBooking } from '../utils/mockApi';
+import { createBooking } from '../firebase/bookingService';
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
@@ -154,7 +154,8 @@ const BookingForm = () => {
     setIsSubmitting(true);
 
     try {
-      await submitBooking(formData);
+      // Save to Firebase database
+      await createBooking(formData);
 
       // Build location link if available
       const locationLink = location
