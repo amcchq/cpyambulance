@@ -4,15 +4,30 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      // Add shadow when scrolled
+      setScrolled(currentScrollY > 20);
+
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setHidden(true); // Scrolling down
+      } else {
+        setHidden(false); // Scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -39,10 +54,10 @@ const Navbar = () => {
         <a href="tel:+919942000266" className="font-bold hover:underline">+91-9942000266</a>
       </div>
 
-      {/* Main Navbar */}
-      <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-glass' : 'bg-white/60 backdrop-blur-sm'}`}>
+      {/* Main Navbar - Smart Hide/Show */}
+      <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-glass shadow-md' : 'bg-white/60 backdrop-blur-sm'} ${hidden ? '-translate-y-full' : 'translate-y-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-16">
             {/* Logo - NOW VISIBLE ON MOBILE */}
             <Link
               to="/"
